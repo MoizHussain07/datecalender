@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Countdown</title>
+</head>
+<body>
+
+    <h1>Event Countdown</h1>
+    <label>Current Date:</label>
+    <input type="date" id="currentDate"><br><br>
+    <label>Event Date:</label>
+    <input type="date" id="eventDate"><br><br>
+    <button id="checkButton">Check Countdown</button>
+    <div id="result"></div>
+
+    <script>
+
+        let currentDate = document.getElementById("currentDate");
+        let eventDate = document.getElementById("eventDate");
+        let checkButton = document.getElementById("checkButton");
+        let result = document.getElementById("result");
+
+        let eventCountdown = () => {
+            result.innerHTML = "";
+            let current = currentDate.value;
+            let event = eventDate.value;
+           
+            let currentDay = new Date(current);
+            let eventDay = new Date(event);
+
+            let currentMilliseconds = currentDay.getTime();
+            let eventMilliseconds = eventDay.getTime();
+
+            let milliseconds = eventMilliseconds - currentMilliseconds;
+
+            if (milliseconds < 0) {
+                result.innerHTML = "<h2>The event has already passed!</h2>";
+                return;
+            }
+
+             let seconds = (milliseconds / 1000);
+            let minutes = (milliseconds / 1000 / 60);
+            let hours = (milliseconds / 1000 / 60 / 60);
+            let days = (milliseconds / 1000 / 60 / 60 / 24);
+            let months = (days / 30);
+            let years = (days / 365);
+
+            result.innerHTML += "<p><b>Milliseconds:</b> " + milliseconds + "</p>";
+            result.innerHTML += "<p><b>Seconds:</b> " + seconds + "</p>";
+            result.innerHTML += "<p><b>Minutes:</b> " + minutes + "</p>";
+            result.innerHTML += "<p><b>Hours:</b> " + hours + "</p>";
+            result.innerHTML += "<p><b>Days:</b> " + days + "</p>";
+            result.innerHTML += "<p><b>Months:</b> " + months + "</p>";
+            result.innerHTML += "<p><b>Years:</b> " + years + "</p>";
+
+        }
+
+        checkButton.addEventListener("click", eventCountdown);
+
+    </script>
+
+</body>
+</html>
